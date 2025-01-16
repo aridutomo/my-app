@@ -1,9 +1,9 @@
 # Build Stage
 FROM node:18 AS builder
 WORKDIR /
-COPY ./package.json .
+COPY ./package.json ./
 RUN npm install
-COPY ./ .
+COPY . .
 RUN npm run build
 
 # Production Stage
