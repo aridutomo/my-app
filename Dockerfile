@@ -1,15 +1,21 @@
-# Build Stage
-FROM node:18 AS builder
-WORKDIR /
-COPY ./package.json ./
-RUN npm install
-COPY . .
-RUN npm run build
+# Use the official Node.js image
+FROM node:18-alpine
 
-# Production Stage
-FROM nginx:alpine
-COPY --from=builder /.next /usr/share/nginx/html/_next
-COPY --from=builder /public /usr/share/nginx/html/static
-COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# Set the working directory
+WORKDIR /app
+
+# Copy package.json and install dependencies
+COPY package.json yarn.lock ./
+RUN yarn install
+
+# Copy the rest of the application files
+COPY . .
+
+# Build the Next.js application
+RUN yarn build
+
+# Expose the port Next.js will run on
+EXPOSE 3000
+
+# Run the application
+CMD ["yarn", "start"]

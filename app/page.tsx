@@ -15,11 +15,8 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
-      <Header />
-      <div>
-        <span id="test" className="cursor-pointer">Test</span>
-      </div>
+    <div className="flex justify-center items-center h-screen">
+      Ari Dwi Utomo
     </div>
   );
 }
