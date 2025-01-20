@@ -20,4 +20,4 @@ RUN yarn install --production && yarn cache clean
 
 EXPOSE 3000
 
-CMD ["yarn", "start"]
+CMD ["yarn", "build"]
